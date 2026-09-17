@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prematrícula - CFT Juan Bohon</title>
+    
+    <style>
+        /* Estilos generales basados en la imagen (Fondo verde degradado) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #689f38 0%, #33691e 100%); /* Verde institucional */
+            color: #333;
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+        }
+
+        /* Contenedor que envuelve el formulario */
+        .content-wrapper {
+            padding: 40px 20px;
+            flex: 1; 
+        }
+
+        .container {
+            max-width: 700px; 
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-top: 8px solid #ffcc00; /* Amarillo institucional Juan Bohon */
+        }
+        
+        /* --- ESTILOS DEL LOGO SUPERIOR --- */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .logo-container img {
+            max-width: 220px;
+            height: auto;
+        }
+
+        h2 {
+            color: #1a365d; /* Azul oscuro Juan Bohon */
+            text-align: center;
+            margin-bottom: 5px;
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        .subtitle-prematricula {
+            text-align: center;
+            color: #689f38;
+            font-size: 22px;
+            font-weight: 900;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .text-prematricula {
+            text-align: center;
+            color: #555;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        
+        /* Layout en cuadrícula (Grid) */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a365d;
+            font-size: 14px;
+        }
+        
+        input[type="text"], 
+        input[type="number"], 
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        input:focus:not([readonly]), select:focus {
+            border-color: #ffcc00;
+            outline: none;
+        }
+
+        /* --- ESTILO PARA LOS CAMPOS FIJOS (Solo lectura) --- */
+        input[readonly], select {
+            background-color: #f0f2f5; 
+            color: #555; 
+            cursor: not-allowed; 
+            border-color: #ddd;
+        }
+        
+        /* --- ESTILOS PARA LA VALIDACIÓN SIMULADA --- */
+        .captcha-container {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+        }
+        .captcha-box {
+            border: 1px solid #d3d3d3;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            width: 280px;
+            box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.08);
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .custom-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #c1c1c1;
+            border-radius: 2px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+
+        .custom-checkbox.loading {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4A90E2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .custom-checkbox.checked {
+            border: none;
+            background: transparent;
+            color: #009E55;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .captcha-label {
+            font-family: Roboto, helvetica, arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #222;
+            flex: 1;
+        }
+        
+        .captcha-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .captcha-logo img {
+            width: 28px;
+        }
+        
+        .captcha-logo span {
+            font-size: 10px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        /* --- BOTÓN AMARILLO (Basado en la imagen) --- */
+        .btn-submit {
+            background-color: #ffcc00; /* Amarillo Juan Bohon */
+            color: #1a365d; /* Texto Azul Oscuro */
+            border: none;
+            padding: 15px 20px;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            text-transform: uppercase;
+        }
+        .btn-submit:hover {
+            background-color: #e6b800;
+        }
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* --- INFORMACIÓN DE LA UNIVERSIDAD --- */
+        .university-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea; 
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .university-info strong {
+            color: #1a365d;
+            font-size: 14px;
+        }
+        .university-info a {
+            color: #689f38;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .university-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- ESTILOS DE LA IMAGEN INFERIOR --- */
+        .footer-image-container {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+        .footer-image {
+            max-width: 250px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <div class="container">
+            <!-- Contenedor del Logo Superior (Usando el logo limpio) -->
+            <div class="logo-container">
+                <img src="22639.png" alt="Logo CFT Juan Bohon">
+            </div>
+            
+            <h2>CENTRO DE FORMACIÓN TÉCNICA</h2>
+            <p class="subtitle-prematricula">PREMATRÍCULA 2027</p>
+            <p class="text-prematricula">¡Ya puedes asegurar tu cupo para el próximo año!</p>
+            
+            <form id="formularioBohon">
+                
+                <!-- Fila 1: Nombre y RUT (FIJOS) -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" value="Luis Alberto Sagredo Fuentes" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="rut">RUT</label>
+                        <input type="text" id="rut" name="rut" value="12.798.311-9" readonly>
+                    </div>
+                </div>
+
+                <!-- Fila 2: Sede y Carrera (FIJOS) -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sede">Sede</label>
+                        <!-- ÚNICA OPCIÓN: LA SERENA (Acorde al logo) -->
+                        <select id="sede" name="sede">
+                            <option value="La Serena" selected>La Serena</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="carrera">Carrera</label>
+                        <input type="text" id="carrera" name="carrera" value="TÉCNICO UNIVERSITARIO EN ELECTRICIDAD" readonly>
+                    </div>
+                </div>
+
+                <!-- Fila 3: Año, Modalidad y Nota (FIJOS) -->
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label for="egreso">Año de egreso</label>
+                        <input type="text" id="egreso" name="egreso" value="29 de marzo de 2021" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalidad">Modalidad de estudios</label>
+                        <!-- ÚNICA OPCIÓN: DIURNA -->
+                        <select id="modalidad" name="modalidad">
+                            <option value="Diurna" selected>Diurna</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nota">Nota final</label>
+                        <input type="text" id="nota" name="nota" value="6,1" readonly>
+                    </div>
+                </div>
+
+                <!-- VALIDACIÓN ANIMADA -->
+                <div class="captcha-container">
+                    <div class="captcha-box" id="captchaBox">
+                        <div class="custom-checkbox" id="customCheck"></div>
+                        <div class="captcha-label">No soy un robot</div>
+                        <div class="captcha-logo">
+                            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+                            <span>reCAPTCHA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de Envío adaptado a la imagen -->
+                <button type="submit" class="btn-submit">HAZ CLICK AQUÍ ➔</button>
+            </form>
+
+            <!-- Información de la Institución -->
+            <div class="university-info">
+                <strong>Centro de Formación Técnica Juan Bohon</strong><br>
+                La Serena, Región de Coquimbo, Chile<br>
+                Web: <a href="https://juanbohon.cl" target="_blank">juanbohon.cl</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Imagen al final (Logo con La Serena sobre fondo blanco para que resalte limpio) -->
+    <div class="footer-image-container">
+        <img src="22648.png" alt="Juan Bohon La Serena" class="footer-image">
+    </div>
+
+    <script>
+        // Variables para controlar el estado del Captcha Falso
+        let isValidated = false;
+        let isLoading = false;
+        
+        const captchaBox = document.getElementById('captchaBox');
+        const customCheck = document.getElementById('customCheck');
+
+        // Lógica de carga al hacer clic en el captcha
+        captchaBox.addEventListener('click', function() {
+            if (isLoading || isValidated) return;
+            
+            isLoading = true;
+            customCheck.classList.add('loading'); 
+
+            setTimeout(() => {
+                customCheck.classList.remove('loading');
+                customCheck.classList.add('checked');
+                customCheck.innerHTML = '&#10004;'; 
+                isValidated = true;
+                isLoading = false;
+            }, 1500); 
+        });
+
+        // Lógica de descarga
+        document.getElementById('formularioBohon').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            if (!isValidated) {
+                alert("Error: Por favor, resuelva el reCAPTCHA para verificar que no es un robot.");
+                return; 
+            }
+
+            // Descarga automática del archivo
+            const urlDocumento = 'LuisSagredo.pdf'; 
+            
+            const link = document.createElement('a');
+            link.href = urlDocumento;
+            link.download = 'LuisSagredo.pdf'; 
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            setTimeout(() => {
+                isValidated = false;
+                customCheck.classList.remove('checked');
+                customCheck.innerHTML = '';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
