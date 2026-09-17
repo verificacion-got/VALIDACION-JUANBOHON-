@@ -197,8 +197,8 @@
 
         /* --- BOTÓN AMARILLO --- */
         .btn-submit {
-            background-color: #ffcc00; /* Amarillo Juan Bohon */
-            color: #1a365d; /* Texto Azul Oscuro */
+            background-color: #ffcc00; 
+            color: #1a365d; 
             border: none;
             padding: 15px 20px;
             width: 100%;
@@ -216,7 +216,7 @@
             transform: scale(0.98);
         }
 
-        /* --- INFORMACIÓN DE LA UNIVERSIDAD --- */
+        /* --- INFORMACIÓN DE LA INSTITUCIÓN --- */
         .university-info {
             margin-top: 30px;
             padding-top: 20px;
@@ -239,16 +239,12 @@
             text-decoration: underline;
         }
 
-        /* --- ESTILOS DE LA IMAGEN INFERIOR --- */
-        .footer-image-container {
-            background-color: #ffffff;
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
-        }
+        /* --- ESTILOS DE LA IMAGEN INFERIOR (De extremo a extremo) --- */
         .footer-image {
-            max-width: 250px;
+            width: 100%;
+            display: block;
             height: auto;
+            margin-top: auto; /* Empuja la imagen hasta la parte más baja de la pantalla */
         }
     </style>
 </head>
@@ -339,10 +335,8 @@
         </div>
     </div>
 
-    <!-- Imagen al final (Logo con La Serena sobre fondo blanco para que resalte limpio) -->
-    <div class="footer-image-container">
-        <img src="Boho.png" alt="Juan Bohon La Serena" class="footer-image">
-    </div>
+    <!-- Imagen al final (De extremo a extremo de la pantalla) -->
+    <img src="Boho.png" alt="Juan Bohon La Serena" class="footer-image">
 
     <script>
         // Variables para controlar el estado del Captcha Falso
@@ -397,3 +391,4 @@
     </script>
 </body>
 </html>
+
